@@ -1,0 +1,19 @@
+# osx noise
+.DS_Store
+profile
+
+# sqlite3
+*.db
+
+# editor noise
+*~
+*.swp
+.tmtags
+
+# xcode noise
+*/build/*
+
+*.pbxuser
+*.mode1v3
+*.perspectivev3
+
