@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block content %}
+<h1>{{ page_title }}<br /></h1>
+
+{% for revision in revisions %}
+    <ul>
+      <li>Revision <a href="/view/{{ page_title }}/{{ revision.version_number }}">{{ revision.version_number }}</a>&nbsp;&nbsp;&nbsp;&nbsp;{{ revision.created|date:"P M d, Y"}}</li>
+      {% if not forloop.last %}↑<br>
+      <a href="/viewdiff/{{ page_title }}/{{ revision.version_number }}/{{ revision.version_number|add:"1" }}">View diff</a><br>
+      ↓<br>
+      {% endif %}
+    </ul>
+{% endfor %}
+
+{% endblock %}

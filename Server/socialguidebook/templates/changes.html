@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Recent changes{% endblock %}
+{% block content %}
+<ul id="tabs">
+<li class="active"><a href="/w/changes">View</a></li>
+<li><a href="/w/changes.rss">RSS</a></li>
+</ul>
+
+<div id="pb" class="wtabs">
+<h1>Recent changes</h1>
+
+{%if changes %}
+<table class="c">
+<thead>
+<tr>
+<th>Page</th>
+<th>Edited on</th>
+<th>Editor</th>
+</tr>
+</thead>
+<tbody>
+{% for page in changes %}
+<tr>
+<td>
+<a class="int{% if page.pread %} public{% endif %}" href="/{{ page.title }}">{{ page.title }}</a>
+</td>
+<td>
+{{ page.updated|date:"d.m.y, H:i" }}
+</td>
+<td>
+{{ page.author.wiki_user }}
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+{% else %}
+<p>Nothing was changed yet.</p>
+{% endif %}
+</div>
+{% endblock %}

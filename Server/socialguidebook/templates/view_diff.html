@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block content %}
+<h1>{{ page_title }}<br /></h1>
+<a href="/revisionlist/{{ page_title }}">View revision list</a><br>
+<em>Version: {{ version }} Last Edited: {{ version_date|date:"P M d, Y"}}</em>
+    {% if author %}
+        <em>By: <a href="/user/{{ author_email }}">{{ author }} </a></em>
+    {% endif %}
+    {% if body %}
+        <div style="border: 1px solid black; margin: 10px; padding: 10px;">
+        <p>
+            {{ body }}
+        </p>
+        </div>
+        <p>
+            <a href="/edit/{{ page_title }}">Edit this page</a>
+        </p>
+    {% else %}
+        <p><a href="/edit/{{ page_title }}">Create this page</a>
+        </p>
+    {% endif %}
+{% endblock %}

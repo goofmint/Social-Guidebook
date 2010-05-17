@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}User Info{% endblock %}
+{% block content %}
+<h1>My User Profile</h1>
+<p>My Email: {{ queried_user.wiki_user.email }}</p>
+<p>Articles By Me</p>
+<ul>
+{% for article_title in articles %}
+<li><a href="/view/{{ article_title }}">{{ article_title }}</a></li>
+{% endfor %}
+</ul>
+<form action="/edituser/{{ queried_user.wiki_user.email }}" method="POST" enctype="multipart/form-data">
+Add a user picture: <input type="file" name="user_picture" size="40"><br>
+Enter your blogger feed URL: <input type="text" name="feed_url" /><br>
+<input type="submit" value="Upload User Information">
+</form>
+{% endblock %}

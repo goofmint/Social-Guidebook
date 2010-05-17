@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Send Admin Email{% endblock %}
+{% block content %}
+<h1>Send an email to the Wiki Admins</h1>
+<form action="/sendadminemail" method="POST">
+Subject: <input type="text" name="subject" size="40"><br>
+Body: <br><textarea name="body" rows=10 cols=80 /></textarea><br>
+<input type="submit" value="Send Email">
+{% endblock %}

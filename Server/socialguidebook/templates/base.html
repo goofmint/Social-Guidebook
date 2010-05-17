@@ -1,0 +1,79 @@
+<html>
+    <head>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+      <base href="{{ base }}"/>
+      <link rel="stylesheet" type="text/css" href="/static/themes/default/style.css"/>
+      <!--
+      <link rel="shortcut icon" href="/static/favicon.ico" /> 
+      -->
+      <link rel="shortcut icon" href="/static/logo.png" type="image/png" /> 
+      <link rel="alternate" type="application/rss+xml" title="New Pages" href="/w/index.rss" /> 
+      {% block heads %}{% endblock %}
+      <title>{% block title %}{% endblock %}</title>
+      {% if settings.owner_meta %}
+        <meta name="google-site-verification" content="{{ settings.owner_meta }}"/>
+      {% endif %}
+    </head>
+    <body>
+    	{% block header %}
+      <div id="header">
+        <div class="top">
+          <div class="login">
+            {% if user %}
+              <strong><a href="/users/{{ user.nickname|escape }}">{{ user.nickname }}</a></strong>
+              <a href="/w/index">Index</a>
+              <a href="/w/changes">Changes</a>
+              {% if is_admin %}
+                <a href="/w/users">Users</a>
+                <a href="/w/settings">Settings</a>
+              {% endif %}
+                <a href="{{log_in_out_url}}">Sign out</a>
+            {% else %}
+              <div align="right"><a href="{{log_in_out_url}}">Log in</a></div>
+            {% endif %}
+          </div>
+          <div class="title">
+            <a href="/"><span>{{ settings.title }}</span></a>
+            <a href="/w/edit">New Page</a>
+          </div>
+        </div>
+        <!--
+        {% if page.name %}
+          <div class="bottom">
+            <div class="buttons">
+              {% if version_date %}
+                <div class="meta">{{ version_date|date:"d.m.y, H:i" }} by {{ author }}</div>
+              {% endif %}
+              {% if page %}
+                <a href="/w/edit">New Page</a>
+                {% if not editing %}
+                  <a href="/w/edit?page={{ page.name|escape }}">Edit Page</a>
+                {% endif %}
+                <a href="/{{ page.name|escape }}?history=1">History</a>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+        -->
+      </div>
+    	{% endblock %}
+    {% if sidebar.body %}
+      <div id="sidebar">
+        {{ sidebar.body }}
+      </div>
+    {% endif %}
+    <div id="page">
+      {% block content %}{% endblock %}
+    </div>
+		{% block footer %}
+      <div id="footer">
+        {% if page.updated %}
+        <p id="pm">This page was last edited {% if page.author %}by <a href="/users/{{ page.author|escape}}">{{ page.author }}</a>{% else %}anonymously{% endif %} on {{ page.updated|date:"d.m.y" }} at {{ page.updated|date:"H:i" }}.</p>
+        {% endif %}
+        {% if settings.footer %}
+          {{ settings.footer }}
+        {% endif %}
+      </div>
+		{% endblock %}
+    </body>
+</html>
