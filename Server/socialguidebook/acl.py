@@ -51,11 +51,10 @@ class acl(object):
     """
     if self.can_edit_settings():
       return True
-    if self.settings.get('pwrite'):
-      return True
     cu = users.get_current_user()
     if not cu:
       raise UnauthorizedException()
+    return True
     wu = WikiUser.gql('WHERE wiki_user = :1', cu).get()
     if not wu:
       raise ForbiddenException()
